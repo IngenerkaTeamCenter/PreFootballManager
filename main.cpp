@@ -1,113 +1,239 @@
 #include <iostream>
 #include "TXLib.h"
+#include "cstdlib"
+
 using namespace std;
 
-void drawKomanda1(COLORREF color)
-{
-    txSetFillColour(color);
-    txSetColour(color);
-
-    txCircle(50, 250 , 20);
-    txCircle(300, 225 , 20);
-    txCircle(300, 275 , 20);
-    txCircle(200, 285 , 20);
-    txCircle(200, 215 , 20);
-    txCircle(250, 70, 20);
-    txCircle(250, 430, 20);
-    txCircle(150, 120, 20);
-    txCircle(150, 380, 20);
-    txCircle(350, 150, 20);
-    txCircle(350, 350, 20);
-}
-
-void drawKomanda2(COLORREF color)
-{
-    txSetFillColour(color);
-    txSetColour(color);
-
-    txCircle(450, 650 , 420);
-    txCircle(700, 625 , 420);
-    txCircle(700, 675 , 420);
-    txCircle(700, 685 , 420);
-    txCircle(700, 615 , 420);
-    txCircle(650, 470, 420);
-    txCircle(650, 730, 420);
-    txCircle(550, 520, 420);
-    txCircle(550, 780, 420);
-    txCircle(750, 550, 420);
-    txCircle(750, 750, 420);
-}
+void Title ();
+void Real (const char* schemaKomandy);
+void BayernMunich (const char* schemaKomandy);
+void Volga (const char* schemaKomandy);
+void Real2 ();
+void BayernMunich2 ();
+void Volga2 ();
+void Circle1 (const char* schemaKomandy);
+void Circle2 ();
 
 int main()
-    {
+{
+    txCreateWindow ( 1250, 600);
 
-    char str[20];
-    txCreateWindow(800, 500);
-    cout << "Выберите команду\n" << endl;
-    cin >> str;
-
-    HDC background_FromTXLibHelp;
-
-    if (strcmp(str, "1") == 0) {
-
-        background_FromTXLibHelp = txLoadImage ("1.bmp");
-        txBitBlt(txDC(), 0, 0, 800, 500, background_FromTXLibHelp, 0, 0);
-
-        drawKomanda1(TX_RED);
-        txSetFillColour(TX_WHITE);
-        txSetColour(TX_WHITE);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(310, 100, 610, 50, "BAYERN MUNCHEN");
-        txDeleteDC (background_FromTXLibHelp);
-    }
-
-    else if (strcmp(str, "2") == 0) {
-        background_FromTXLibHelp = txLoadImage ("1.bmp");
-        txBitBlt(txDC(), 0, 0, 800, 500, background_FromTXLibHelp, 0, 0);
-
-        drawKomanda1(TX_YELLOW);
-        txSetFillColour(TX_WHITE);
-        txSetColour(TX_WHITE);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(310, 100, 610, 50, "BOR.DORTMUND");
-        txDeleteDC (background_FromTXLibHelp);
-     }
-    else if (strcmp(str, "3") == 0) {
-
-        background_FromTXLibHelp = txLoadImage ("1.bmp");
-        txBitBlt(txDC(), 0, 0, 800, 500, background_FromTXLibHelp, 0, 0);
-
-        drawKomanda2(TX_RED);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(550, 780, 420, 50, "TTT");
-        txSetFillColour(TX_WHITE);
-        txSetColour(TX_WHITE);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(310, 100, 610, 50, "BAYERN MUNCHEN 2");
-        txDeleteDC (background_FromTXLibHelp);
-    }
-
-    else if (strcmp(str, "4") == 0) {
-        background_FromTXLibHelp = txLoadImage ("1.bmp");
-        txBitBlt(txDC(), 0, 0, 800, 500, background_FromTXLibHelp, 0, 0);
-
-        drawKomanda2(TX_YELLOW);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(600, 615, 420, 50, "DDD");
-        txSetFillColour(TX_WHITE);
-        txSetColour(TX_WHITE);
-        txSelectFont ("Comic Sans MS", 32);
-        txDrawText(310, 100, 610, 50, "BOR.DORTMUND 2");
-        txDeleteDC (background_FromTXLibHelp);
-
-    } else if (strcmp(str, "2") == 0) {
-
-        background_FromTXLibHelp = txLoadImage ("1.bmp");
-        txBitBlt(txDC(), 0, 0, 800, 500, background_FromTXLibHelp, 0, 0);
-
-        txDeleteDC (background_FromTXLibHelp);
-
-    }
+    Title ();
 
     return 0;
+}
+
+
+void Title ()
+{
+    char komanda1[20];
+    char komanda2[20];
+    char schema_komanda1[20];
+
+    cout << "Команда (1-Илмра, 2-Бавария, 3-Волга)" << endl;
+    cin >> komanda1;
+    cout << "Выберите противника (1-Илмра, 2-Бавария, 3-Волга)" << endl;
+    cin >> komanda2;
+    cout << "Выберите позицию(1, 2, 3)" << endl;
+    cin >> schema_komanda1;
+
+    if (strcmp(komanda1, komanda2) == 0)
+    {
+        system("cls");
+        cout << "Одинаковые команды!" << endl;
+        Title () ;
+    }
+
+    HDC FootballPole;
+    FootballPole = txLoadImage ("FootballPole.bmp");
+    txBitBlt (txDC(), 0, 0, 1000, 800, FootballPole, 0, 0);
+
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+
+    if (strcmp(komanda1, "1") == 0)
+    {
+        Real (schema_komanda1);
+    }
+    else if (strcmp(komanda1, "2") == 0)
+    {
+        BayernMunich (schema_komanda1);
+    }
+    else if (strcmp(komanda1, "3") == 0)
+    {
+        Volga (schema_komanda1);
+    }
+
+
+    if (strcmp(komanda2, "1") == 0)
+    {
+        Real2 ();
+    }
+    else if (strcmp(komanda2, "2") == 0)
+    {
+        BayernMunich2 ();
+    }
+    else if (strcmp(komanda2, "3") == 0)
+    {
+        Volga2 ();
+    }
+
+    txDeleteDC (FootballPole);
+    }
+
+void Circle1 (const char* schemaKomandy)
+{
+    if (strcmp(schemaKomandy, "1") == 0)
+    {
+        txCircle (125, 300, 20);
+        txCircle (200, 130, 20);
+        txCircle (200, 200, 20);
+        txCircle (200, 430, 20);
+        txCircle (300, 385, 20);
+        txCircle (310, 460, 20);
+        txCircle (385, 350, 20);
+        txCircle (400, 200, 20);
+        txCircle (450, 352, 20);
+        txCircle (480, 250, 20);
+    }
+    else if (strcmp(schemaKomandy, "2") == 0)
+    {
+        txCircle (25, 300, 20);
+        txCircle (200, 130, 20);
+        txCircle (200, 200, 20);
+        txCircle (200, 430, 20);
+        txCircle (300, 385, 20);
+        txCircle (310, 460, 20);
+        txCircle (385, 350, 20);
+        txCircle (400, 200, 20);
+        txCircle (450, 352, 20);
+        txCircle (480, 250, 20);
+    }
+
+    else if (strcmp(schemaKomandy, "3") == 0)
+    {
+        txCircle (25, 300, 20);
+        txCircle (200, 130, 20);
+        txCircle (200, 200, 20);
+        txCircle (200, 430, 20);
+        txCircle (300, 385, 20);
+        txCircle (310, 460, 20);
+        txCircle (385, 350, 20);
+        txCircle (400, 200, 20);
+        txCircle (450, 444, 20);
+        txCircle (480, 250, 20);
+    }
+}
+
+void Circle2 ()
+{
+    txSetColor (TX_BLUE);
+    txSetFillColor (TX_BLUE);
+
+    txCircle (800, 130, 20);
+    txCircle (800, 230, 20);
+    txCircle (900, 300, 20);
+    txCircle (800, 430, 20);
+    txCircle (700, 300, 20);
+    txCircle (600, 350, 20);
+    txCircle (600, 200, 20);
+    txCircle (550, 400, 20);
+    txCircle (590, 250, 20);
+    txCircle (690, 460, 20);
+}
+
+void Real (const char* schemaKomandy)
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txTextOut (50, 550, "Real Madrid");
+
+    Circle1 (schemaKomandy);
+
+    txSelectFont ("Arial", 20, 0, FW_BOLD);
+
+    txTextOut  (1000, 100, "Mondalnio");
+    txTextOut  (1000, 150, "Bermena");
+    txTextOut  (1000, 200, "Kalebrate");
+    txTextOut  (1000, 250, "Lordis");
+    txTextOut  (1000, 300, "Koropos");
+    txTextOut  (1000, 350, "Dilardos");
+    txTextOut  (1000, 400, "Virgago");
+    txTextOut  (1000, 450, "Girogia");
+    txTextOut  (1000, 500, "Plop");
+    txTextOut  (1000, 550, "Poplo");
+    txTextOut  (1000, 575, "Poplita");
+}
+
+void Real2 ()
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txTextOut (550, 550, "Real Madrid");
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+    Circle2 ();
+}
+
+void BayernMunich (const char* schemaKomandy)
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txTextOut (50, 550, "BayernMunich");
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+
+    Circle1 (schemaKomandy);
+
+    txSelectFont ("Arial", 20, 0, FW_BOLD);
+    txTextOut  (1000, 100, "Lewandowski");
+    txTextOut  (1010, 150, "Riberg");
+    txTextOut  (1020, 200, "Muller");
+    txTextOut  (1000, 250, "Robben");
+    txTextOut  (1010, 300, "Thiago");
+    txTextOut  (1020, 350, "Morostop");
+    txTextOut  (1000, 400, "Lopsap");
+    txTextOut  (1010, 450, "Kimmicn");
+    txTextOut  (1020, 500, "Boateng");
+    txTextOut  (1000, 550, "Hummeis");
+    txTextOut  (1010, 575, "Neuer");
+}
+
+void BayernMunich2 ()
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txTextOut (550, 550, "BayernMunich");
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+    Circle2 ();
+}
+
+void Volga (const char* schemaKomandy)
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txTextOut (50, 550, "Volga");
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+
+    Circle1(schemaKomandy);
+
+    txSelectFont ("Arial", 20, 0, FW_BOLD);
+    txTextOut  (1000, 100, "Герасим Арбт");
+    txTextOut  (1000, 150, "Пасько Артём");
+    txTextOut  (1000, 200, "Полянин Дмитрий");
+    txTextOut  (1000, 250, "Ытвувтутву Оуау");
+    txTextOut  (1000, 300, "Шурыгина Диана");
+    txTextOut  (1000, 350, "Шеляков Алексей");
+    txTextOut  (1000, 400, "Леандро да Силва");
+    txTextOut  (1000, 450, "Петров Илья");
+    txTextOut  (1000, 500, "Саркисов Артур");
+    txTextOut  (1000, 550, "Суругукин Илья");
+    txTextOut  (1000, 575, "Вдовиченко Николай");
+}
+
+void Volga2 ()
+{
+    txSelectFont ("Arial", 50, 0, FW_BOLD);
+    txSetColor (TX_YELLOW);
+    txSetFillColor (TX_YELLOW);
+    txTextOut (550, 550, "Volga");
+    Circle2 ();
 }
