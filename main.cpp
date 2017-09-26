@@ -30,11 +30,11 @@ void Title ()
     char komanda2[20];
     char schema_komanda1[20];
 
-    cout << "Команда (1-Илмра, 2-Бавария, 3-Волга)" << endl;
+    cout << "Команда (Real, Bavaria, Volga)" << endl;
     cin >> komanda1;
-    cout << "Выберите противника (1-Илмра, 2-Бавария, 3-Волга)" << endl;
+    cout << "Выберите противника (Real, Bavaria, Volga)" << endl;
     cin >> komanda2;
-    cout << "Выберите позицию(1, 2, 3)" << endl;
+    cout << "Выберите схему(451, 433, 422)" << endl;
     cin >> schema_komanda1;
 
     if (strcmp(komanda1, komanda2) == 0)
@@ -52,29 +52,31 @@ void Title ()
     txSetFillColor (TX_YELLOW);
     txSelectFont ("Arial", 50, 0, FW_BOLD);
 
-    if (strcmp(komanda1, "1") == 0)
+    cout << komanda1;
+
+    if (strcmp(komanda1, "Real") == 0)
     {
         Real (schema_komanda1);
     }
-    else if (strcmp(komanda1, "2") == 0)
+    else if (strcmp(komanda1, "Bavaria") == 0)
     {
         BayernMunich (schema_komanda1);
     }
-    else if (strcmp(komanda1, "3") == 0)
+    else if (strcmp(komanda1, "Volga") == 0)
     {
         Volga (schema_komanda1);
     }
 
 
-    if (strcmp(komanda2, "1") == 0)
+    if (strcmp(komanda2, "Real") == 0)
     {
         Real2 ();
     }
-    else if (strcmp(komanda2, "2") == 0)
+    else if (strcmp(komanda2, "Bavaria") == 0)
     {
         BayernMunich2 ();
     }
-    else if (strcmp(komanda2, "3") == 0)
+    else if (strcmp(komanda2, "Volga") == 0)
     {
         Volga2 ();
     }
@@ -84,7 +86,8 @@ void Title ()
 
 void Circle1 (const char* schemaKomandy)
 {
-    if (strcmp(schemaKomandy, "1") == 0)
+    cout << schemaKomandy;
+    if (strcmp(schemaKomandy, "451") == 0)
     {
         txCircle (125, 300, 20);
         txCircle (200, 130, 20);
@@ -97,7 +100,7 @@ void Circle1 (const char* schemaKomandy)
         txCircle (450, 352, 20);
         txCircle (480, 250, 20);
     }
-    else if (strcmp(schemaKomandy, "2") == 0)
+    else if (strcmp(schemaKomandy, "433") == 0)
     {
         txCircle (25, 300, 20);
         txCircle (200, 130, 20);
@@ -111,7 +114,7 @@ void Circle1 (const char* schemaKomandy)
         txCircle (480, 250, 20);
     }
 
-    else if (strcmp(schemaKomandy, "3") == 0)
+    else if (strcmp(schemaKomandy, "422") == 0)
     {
         txCircle (25, 300, 20);
         txCircle (200, 130, 20);
